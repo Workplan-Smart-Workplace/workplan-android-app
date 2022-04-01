@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "441373730087",
+    "project_id": "workplan-9dbc7",
+    "storage_bucket": "workplan-9dbc7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:441373730087:android:ce9414ac3455cbbbd93502",
+        "android_client_info": {
+          "package_name": "com.example.workplan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "441373730087-82p6degf17p7s98fn1s0jbp9f8ibn1qt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwE5gWQTZzPYgFojmq1-bGxLfO2EIgv10"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "441373730087-82p6degf17p7s98fn1s0jbp9f8ibn1qt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
