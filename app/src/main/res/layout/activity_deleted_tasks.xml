@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EDEEF4"
-    tools:context=".NotificationsActivity">
+    tools:context=".DeletedTasksActivity">
 
     <View
         android:id="@+id/menuBackground"
@@ -24,7 +24,7 @@
         android:background="@drawable/menuselect"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/notifsIcon"
         app:layout_constraintTop_toTopOf="@+id/menuBackground" />
 
     <View
@@ -38,16 +38,6 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <View
-        android:id="@+id/notifsIcon"
-        android:layout_width="22dp"
-        android:layout_height="24dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/ic_notifs_icon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <View
         android:id="@+id/tasksIcon"
         android:layout_width="24dp"
         android:layout_height="24dp"
@@ -56,6 +46,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/notifsIcon" />
+
+    <View
+        android:id="@+id/notifsIcon"
+        android:layout_width="22dp"
+        android:layout_height="24dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/ic_notifs_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <View
         android:id="@+id/menuTopLine"
@@ -76,8 +76,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -93,8 +93,10 @@
                     android:background="@drawable/bgrectangle"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <View
                     android:id="@+id/icon"
@@ -107,13 +109,24 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/regFlavorText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="Restore recently deleted tasks."
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/screenTitle" />
+
+                <TextView
                     android:id="@+id/screenTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
                     android:layout_marginTop="15dp"
                     android:fontFamily="@font/roboto_bold"
-                    android:text="Notifications"
+                    android:text="Deleted Tasks"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="#000000"
                     android:textSize="28sp"
@@ -121,63 +134,20 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/icon" />
 
-                <TextView
-                    android:id="@+id/dateTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginTop="2dp"
-                    android:fontFamily="@font/roboto"
-                    android:text="Date"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/screenTitle" />
-
-                <TextView
-                    android:id="@+id/meetReqTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginTop="12dp"
-                    android:text="Current Meeting Requests"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/dateTime" />
-
-                <TextView
-                    android:id="@+id/taskReqTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginTop="12dp"
-                    android:text="Current Task Requests"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/meetingRequests" />
-
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/meetingRequests"
+                    android:id="@+id/homeCurrentTasks"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="12dp"
                     android:layout_marginEnd="40dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/meetReqTitle" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/taskRequests"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="40dp"
-                    android:layout_marginBottom="30dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/taskReqTitle" />
+                    app:layout_constraintTop_toBottomOf="@+id/regFlavorText" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
+
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

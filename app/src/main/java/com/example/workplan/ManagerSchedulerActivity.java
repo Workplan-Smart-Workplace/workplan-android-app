@@ -97,4 +97,14 @@ public class ManagerSchedulerActivity extends AppCompatActivity {
         Intent i = new Intent(ManagerSchedulerActivity.this, NewMeetingActivity.class);
         startActivity(i);
     }
+
+    public void navToDeletedTasks (View view){
+        Intent i = new Intent(ManagerSchedulerActivity.this, DeletedTasksActivity.class);
+        startActivity(i);
+    }
+
+    public void navToDeclinedMeetings (View view){
+        Intent i = new Intent(ManagerSchedulerActivity.this, DeclinedMeetingsActivity.class);
+        startActivity(i);
+    }
 }

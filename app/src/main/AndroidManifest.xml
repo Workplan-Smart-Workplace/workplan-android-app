@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Workplan">
         <activity
+            android:name=".DeclinedMeetingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DeletedTasksActivity"
+            android:exported="false" />
+        <activity
             android:name=".NewMeetingActivity"
             android:exported="false" />
         <activity

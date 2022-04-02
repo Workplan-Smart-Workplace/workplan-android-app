@@ -19,4 +19,7 @@
     <style name="SecondaryButton" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/teal_secondary</item>
     </style>
+    <style name="ThirdButton" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/green_secondary</item>
+    </style>
 </resources>

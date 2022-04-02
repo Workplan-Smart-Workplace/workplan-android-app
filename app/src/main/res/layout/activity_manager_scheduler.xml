@@ -20,6 +20,16 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <View
+        android:id="@+id/menuSelect"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:background="@drawable/menuselect"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/notifsIcon"
+        app:layout_constraintTop_toTopOf="@+id/menuTopLine" />
+
+    <View
         android:id="@+id/icon"
         android:layout_width="110dp"
         android:layout_height="110dp"
@@ -110,7 +120,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="40dp"
         android:background="@drawable/bigbutton"
         android:onClick="newTask"
@@ -124,7 +134,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/roboto"
         android:text="Create New"
         android:textColor="#000000"
@@ -147,17 +157,36 @@
         app:layout_constraintTop_toBottomOf="@+id/newTask" />
 
     <Button
-        android:id="@+id/recentlyDeleted"
+        android:id="@+id/declinedMeetings"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="40dp"
-        android:background="@drawable/bigbutton"
+        android:background="@drawable/secondarybutton"
+        android:onClick="navToDeclinedMeetings"
+        android:text="Declined Meetings"
+        android:theme="@style/Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recentlyDeleted" />
+
+    <Button
+        android:id="@+id/recentlyDeleted"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/secondarybutton"
+        android:onClick="navToDeletedTasks"
         android:text="Recently Deleted Tasks"
+        android:theme="@style/ThirdButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tasksDesc" />
+        app:layout_constraintTop_toBottomOf="@+id/tasksDesc"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
         android:id="@+id/tasksDesc"
@@ -166,7 +195,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/roboto"
-        android:text="Other"
+        android:text="Archive"
         android:textColor="#000000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newMeeting" />

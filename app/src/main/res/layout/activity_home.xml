@@ -18,6 +18,16 @@
         app:layout_constraintTop_toBottomOf="@+id/menuTopLine" />
 
     <View
+        android:id="@+id/menuSelect"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:background="@drawable/menuselect"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/notifsIcon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/menuBackground" />
+
+    <View
         android:id="@+id/homeIcon"
         android:layout_width="24dp"
         android:layout_height="24dp"
