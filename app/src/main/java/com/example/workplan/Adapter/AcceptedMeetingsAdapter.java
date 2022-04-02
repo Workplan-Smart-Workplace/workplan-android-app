@@ -1,6 +1,7 @@
 package com.example.workplan.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class AcceptedMeetingsAdapter extends RecyclerView.Adapter<AcceptedMeetingsAdapter.AcceptedMeetingViewHolder> {
 
@@ -50,6 +52,13 @@ public class AcceptedMeetingsAdapter extends RecyclerView.Adapter<AcceptedMeetin
 
     @Override
     public void onBindViewHolder(@NonNull AcceptedMeetingViewHolder holder, int position) {
+
+        // meeting colours
+        int secondaryTeal = Color.parseColor("#40B5AE");
+        int secondaryGreen = Color.parseColor("#A5CC36");
+        int primaryIndigo = Color.parseColor("#4E37DA");
+        int secondaryOrange = Color.parseColor("#DA9937");
+
         // set position for onClick listeners for each meeting
         holder.denyClickListener.setPosition(position);
 
@@ -58,6 +67,22 @@ public class AcceptedMeetingsAdapter extends RecyclerView.Adapter<AcceptedMeetin
         holder.mName.setText(meetingModel.getName());
         holder.mDueDate.setText(meetingModel.getDate() + ", ");
         holder.mDueTime.setText(meetingModel.getTime());
+        int mColour = meetingModel.getColour();
+
+        switch(mColour){
+            case 0:
+                holder.mMeetingColour.setBackgroundColor(secondaryTeal);
+                break;
+            case 1:
+                holder.mMeetingColour.setBackgroundColor(secondaryGreen);
+                break;
+            case 2:
+                holder.mMeetingColour.setBackgroundColor(primaryIndigo);
+                break;
+            case 3:
+                holder.mMeetingColour.setBackgroundColor(secondaryOrange);
+                break;
+        }
 
         DocumentReference userDetails = firestore.collection("users").document(meetingModel.getBy());
         userDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -115,6 +140,7 @@ public class AcceptedMeetingsAdapter extends RecyclerView.Adapter<AcceptedMeetin
             mEmployees = itemView.findViewById(R.id.membersNames);
             mConfirm = itemView.findViewById(R.id.singleTaskCheckIcon);
             mDeny = itemView.findViewById(R.id.singleTaskChangeIcon);
+            mMeetingColour = itemView.findViewById(R.id.cardBackground);
 
             denyClickListener = new AcceptedMeetingsAdapter.DenyClickListener();
             mDeny.setOnClickListener(denyClickListener);

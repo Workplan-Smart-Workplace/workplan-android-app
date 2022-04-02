@@ -23,7 +23,7 @@
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_marginBottom="40dp"
-        android:background="@drawable/circle"
+        android:background="@drawable/workplan_logo_circle"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

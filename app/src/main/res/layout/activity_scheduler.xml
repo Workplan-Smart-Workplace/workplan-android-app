@@ -35,7 +35,7 @@
         android:layout_height="110dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="80dp"
-        android:background="@drawable/circle"
+        android:background="@drawable/workplan_logo_circle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -48,16 +48,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/background"
         app:layout_constraintEnd_toStartOf="@+id/notifsIcon"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <View
-        android:id="@+id/signOutBtn"
-        android:layout_width="24dp"
-        android:layout_height="21dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/ic_signout_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/background" />
 
     <View
         android:id="@+id/tasksIcon"
@@ -115,32 +105,75 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/tasksSchedule"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/homeTasksTitle2"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="40dp"
-        android:background="@drawable/secondarybutton"
-        android:text="Schedule"
-        android:theme="@style/SecondaryButton"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/roboto"
+        android:text="Create New"
+        android:textColor="#000000"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newTask" />
+        app:layout_constraintTop_toBottomOf="@+id/regFlavorText" />
 
     <Button
         android:id="@+id/newTask"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="40dp"
         android:background="@drawable/bigbutton"
         android:onClick="newTask"
         android:text="Add New Task"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regFlavorText" />
+        app:layout_constraintTop_toBottomOf="@+id/homeTasksTitle2" />
+
+    <Button
+        android:id="@+id/declinedMeetings"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/secondarybutton"
+        android:onClick="navToDeclinedMeetings"
+        android:text="Declined Meetings"
+        android:theme="@style/Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recentlyDeleted" />
+
+    <Button
+        android:id="@+id/recentlyDeleted"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/secondarybutton"
+        android:onClick="navToDeletedTasks"
+        android:text="Recently Deleted Tasks"
+        android:theme="@style/ThirdButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tasksDesc"
+        tools:ignore="TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/tasksDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/roboto"
+        android:text="Archive"
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newTask" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

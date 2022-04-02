@@ -23,6 +23,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
@@ -41,6 +42,7 @@ public class HomeActivity extends AppCompatActivity {
     private RecyclerView taskRecyclerView, meetingRecyclerView;
     private String userID, acceptedCheck;
     private TextView hWelcome, hDate, tasksDesc, meetingsDesc;
+    private ListenerRegistration meetingRegistration, taskRegistration;
 
     // firebase
     private FirebaseAuth fAuth;
@@ -157,6 +159,8 @@ public class HomeActivity extends AppCompatActivity {
 
     // signs out current user
     private void signOut(){
+        taskRegistration.remove();
+        meetingRegistration.remove();
         fAuth.signOut();
         Toast.makeText(HomeActivity.this, "Signed Out", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(HomeActivity.this, SignInActivity.class);
@@ -167,7 +171,7 @@ public class HomeActivity extends AppCompatActivity {
     private void showTasks(){
         userID = fAuth.getCurrentUser().getUid();
         // queries based on accepted, incomplete tasks for the current user
-        fStore.collection("tasks").whereEqualTo("for",userID).whereEqualTo("accepted", 1).whereEqualTo("complete", 0).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        taskRegistration = fStore.collection("tasks").whereEqualTo("for",userID).whereEqualTo("accepted", 1).whereEqualTo("complete", 0).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 // adds each task model in this query to tList, and the adapter is updated
@@ -189,7 +193,7 @@ public class HomeActivity extends AppCompatActivity {
     private void showMeetings(){
         userID = fAuth.getCurrentUser().getUid();
         acceptedCheck = userID + "1";
-        fStore.collection("meetings").whereArrayContains("invited", acceptedCheck).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        meetingRegistration = fStore.collection("meetings").whereArrayContains("invited", acceptedCheck).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 for (DocumentChange documentChange : value.getDocumentChanges()){

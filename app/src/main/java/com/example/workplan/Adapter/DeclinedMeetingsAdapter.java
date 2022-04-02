@@ -2,6 +2,7 @@ package com.example.workplan.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +59,13 @@ public class DeclinedMeetingsAdapter extends RecyclerView.Adapter<DeclinedMeetin
 
     @Override
     public void onBindViewHolder(@NonNull DeclinedMeetingViewHolder holder, int position) {
+
+        // meeting colours
+        int secondaryTeal = Color.parseColor("#40B5AE");
+        int secondaryGreen = Color.parseColor("#A5CC36");
+        int primaryIndigo = Color.parseColor("#4E37DA");
+        int secondaryOrange = Color.parseColor("#DA9937");
+
         // set position for onClick listeners for each meeting
         holder.restoreClickListener.setPosition(position);
         holder.deleteClickListener.setPosition(position);
@@ -76,6 +84,23 @@ public class DeclinedMeetingsAdapter extends RecyclerView.Adapter<DeclinedMeetin
                 holder.mEmployees.setText(fName);
             }
         });
+
+        int mColour = meetingModel.getColour();
+
+        switch(mColour){
+            case 0:
+                holder.mMeetingColour.setBackgroundColor(secondaryTeal);
+                break;
+            case 1:
+                holder.mMeetingColour.setBackgroundColor(secondaryGreen);
+                break;
+            case 2:
+                holder.mMeetingColour.setBackgroundColor(primaryIndigo);
+                break;
+            case 3:
+                holder.mMeetingColour.setBackgroundColor(secondaryOrange);
+                break;
+        }
 
     }
 
@@ -150,6 +175,7 @@ public class DeclinedMeetingsAdapter extends RecyclerView.Adapter<DeclinedMeetin
             mEmployees = itemView.findViewById(R.id.membersNames);
             mConfirm = itemView.findViewById(R.id.singleTaskCheckIcon);
             mDeny = itemView.findViewById(R.id.singleTaskChangeIcon);
+            mMeetingColour = itemView.findViewById(R.id.cardBackground);
 
             restoreClickListener = new RestoreClickListener();
             deleteClickListener = new DeleteClickListener();

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.workplan.Adapter.UnacceptedMeetingsAdapter;
 import com.example.workplan.Model.MeetingID;
@@ -30,11 +31,12 @@ import java.util.List;
 public class NotificationsActivity extends AppCompatActivity {
 
     // global variable declarations
-    private View homeBtn, tasksBtn;
+    private View homeBtn, tasksBtn, menuSelect, notifsBtn;
     private List<MeetingModel> mList; // meeting model list
     private UnacceptedMeetingsAdapter meetingsAdapter;
     private RecyclerView meetingsRecyclerView;
     private String userID, acceptedCheck;
+    private TextView meetDesc;
 
     // firebase
     private FirebaseAuth fAuth;
@@ -48,6 +50,11 @@ public class NotificationsActivity extends AppCompatActivity {
         // bottom buttons declaration
         homeBtn = findViewById(R.id.homeIcon);
         tasksBtn = findViewById(R.id.tasksIcon);
+        notifsBtn = findViewById(R.id.notifsIcon);
+
+        //declare XML elements
+        meetDesc = findViewById(R.id.meetReqTitle);
+        menuSelect = findViewById(R.id.menuSelect);
 
         //declare firebase auth and store
         fAuth = FirebaseAuth.getInstance();
@@ -107,6 +114,9 @@ public class NotificationsActivity extends AppCompatActivity {
                         MeetingModel meetingModel = documentChange.getDocument().toObject(MeetingModel.class).withId(String.valueOf(id));
                         mList.add(meetingModel);
                         meetingsAdapter.notifyDataSetChanged();
+                        if (mList.isEmpty()) {
+                            meetDesc.setText("You have no meeting requests.");
+                        }
                     }
                 }
             }

@@ -18,7 +18,7 @@ import java.util.Calendar;
 public class SchedulerActivity extends AppCompatActivity {
 
     // global variable declarations
-    private View tSignOutBtn, tNotifsButton, tHomeButton; // menu and sign out buttons
+    private View tNotifsButton, tHomeButton; // menu and sign out buttons
     private TextView tDate;
     public Button tNewTaskBtn;
 
@@ -34,7 +34,6 @@ public class SchedulerActivity extends AppCompatActivity {
         // bottom buttons declaration + SignOut
         tNotifsButton = findViewById(R.id.notifsIcon);
         tHomeButton = findViewById(R.id.homeIcon);
-        tSignOutBtn = findViewById(R.id.signOutBtn);
 
         // declare XML elements
         tNewTaskBtn = findViewById(R.id.newTask);
@@ -49,14 +48,6 @@ public class SchedulerActivity extends AppCompatActivity {
         SimpleDateFormat formatDate = new SimpleDateFormat("EEE, MMM d");
         String formattedDate = formatDate.format(calendar.getTime());
         tDate.setText(formattedDate);
-
-        // sets function for sign out button
-        tSignOutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signOut();
-            }
-        });
 
         // nav to notifications
         tNotifsButton.setOnClickListener(new View.OnClickListener() {
@@ -89,6 +80,16 @@ public class SchedulerActivity extends AppCompatActivity {
     // nav to new task activity
     public void newTask (View view){
         Intent i = new Intent(SchedulerActivity.this, NewTaskActivity.class);
+        startActivity(i);
+    }
+
+    public void navToDeletedTasks (View view){
+        Intent i = new Intent(SchedulerActivity.this, DeletedTasksActivity.class);
+        startActivity(i);
+    }
+
+    public void navToDeclinedMeetings (View view){
+        Intent i = new Intent(SchedulerActivity.this, DeclinedMeetingsActivity.class);
         startActivity(i);
     }
 

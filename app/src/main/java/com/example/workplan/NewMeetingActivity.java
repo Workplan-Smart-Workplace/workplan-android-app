@@ -45,6 +45,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class NewMeetingActivity extends AppCompatActivity {
 
@@ -56,7 +57,7 @@ public class NewMeetingActivity extends AppCompatActivity {
     private TextView selectDate, selectTime;
     private NewMeetingEmployeesAdapter adapter;
     private String currentName, dueDate, dueTime, userID, tempUserID;
-    private int status;
+    private int status, mColour;
 
     // lists
     private List<EmployeeModel> eList;
@@ -334,6 +335,11 @@ public class NewMeetingActivity extends AppCompatActivity {
              userID = fAuth.getCurrentUser().getUid();
              Map<String,Object> meetMap = new HashMap<>();
 
+             // sets random meeting colour
+            Random rand = new Random();
+            int upperbound = 4;
+            int mColour = rand.nextInt(upperbound);
+
              // meeting data
              meetMap.put("name", name);
              meetMap.put("date", dueDate);
@@ -341,6 +347,7 @@ public class NewMeetingActivity extends AppCompatActivity {
              meetMap.put("complete", status);
              meetMap.put("invited", employeeInviteIDs);
              meetMap.put("by", userID);
+             meetMap.put("colour", mColour);
 
             Task<DocumentReference> tasks = fStore.collection("meetings").add(meetMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                 @Override
