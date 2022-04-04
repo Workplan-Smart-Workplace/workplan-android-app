@@ -1,0 +1,63 @@
+{
+	"FeatureCollection": [{
+			"Name": "Office Area",
+			"Polygon": [
+				{
+					"Latitude": "43.6574926",
+					"Longitude": "-79.3774379"
+				},
+				{
+					"Latitude": "43.6572404",
+					"Longitude": "-79.3773440"
+				},
+				{
+					"Latitude": "43.6571531",
+					"Longitude": "-79.3773037"
+				},
+				{
+					"Latitude": "43.6570657",
+					"Longitude": "-79.3772715"
+				},
+				{
+					"Latitude": "43.6570929",
+					"Longitude": "-79.3769763"
+				},
+				{
+					"Latitude": "43.6571375",
+					"Longitude": "-79.3769173"
+				},
+				{
+					"Latitude": "43.6575955",
+					"Longitude": "-79.3771159"
+				},
+				{
+					"Latitude": "43.6576595",
+					"Longitude": "-79.3771320"
+				}
+			,
+				{
+					"Latitude": "43.6576130",
+					"Longitude": "-79.3774057"
+				}
+			,
+				{
+					"Latitude": "43.6575897",
+					"Longitude": "-79.3774620"
+				}
+			,
+				{
+					"Latitude": "43.6575256",
+					"Longitude": "-79.3774459"
+				}
+			,
+				{
+					"Latitude": "43.6574771",
+					"Longitude": "-79.3774379"
+				}
+
+
+			]
+
+		}
+	]
+}
