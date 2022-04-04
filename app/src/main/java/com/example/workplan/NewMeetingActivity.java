@@ -35,6 +35,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -58,6 +59,7 @@ public class NewMeetingActivity extends AppCompatActivity {
     private NewMeetingEmployeesAdapter adapter;
     private String currentName, dueDate, dueTime, userID, tempUserID;
     private int status, mColour;
+    private ListenerRegistration employeeRegistration;
 
     // lists
     private List<EmployeeModel> eList;
@@ -186,9 +188,30 @@ public class NewMeetingActivity extends AppCompatActivity {
 
     }
 
+    // Override going back to Sign In screen upon back click
+    @Override
+    public void onBackPressed(){
+        employeeRegistration.remove();
+        DocumentReference userDetails = fStore.collection("users").document(userID);
+        userDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                String isManager = documentSnapshot.getString("manager");
+                Intent i;
+                if (isManager.equals("true")) { // if user is a manager
+                    i = new Intent(NewMeetingActivity.this, ManagerSchedulerActivity.class);
+                }
+                else {
+                    i = new Intent(NewMeetingActivity.this, SchedulerActivity.class);
+                }
+                startActivity(i);
+            }
+        });
+    }
+
     // shows currently invited employees in the recyclerView
     private void showEmployees(){
-        fStore.collection("meetingInvites").document(userID).collection("invites").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        employeeRegistration = fStore.collection("meetingInvites").document(userID).collection("invites").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 for (DocumentChange documentChange : value.getDocumentChanges()){

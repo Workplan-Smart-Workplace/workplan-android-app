@@ -114,6 +114,8 @@ public class HomeActivity extends AppCompatActivity {
         notifsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                taskRegistration.remove();
+                meetingRegistration.remove();
                 Intent i = new Intent(HomeActivity.this, NotificationsActivity.class);
                 startActivity(i);
             }
@@ -127,6 +129,8 @@ public class HomeActivity extends AppCompatActivity {
                 userDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        taskRegistration.remove();
+                        meetingRegistration.remove();
                         String isManager = documentSnapshot.getString("manager");
                         Intent i;
                         if (isManager.equals("true")) { // if user is a manager

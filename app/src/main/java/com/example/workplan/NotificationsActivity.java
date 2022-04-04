@@ -22,10 +22,13 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 public class NotificationsActivity extends AppCompatActivity {
@@ -36,7 +39,8 @@ public class NotificationsActivity extends AppCompatActivity {
     private UnacceptedMeetingsAdapter meetingsAdapter;
     private RecyclerView meetingsRecyclerView;
     private String userID, acceptedCheck;
-    private TextView meetDesc;
+    private TextView meetDesc, nDate;
+    private ListenerRegistration meetingRegistration;
 
     // firebase
     private FirebaseAuth fAuth;
@@ -55,6 +59,7 @@ public class NotificationsActivity extends AppCompatActivity {
         //declare XML elements
         meetDesc = findViewById(R.id.meetReqTitle);
         menuSelect = findViewById(R.id.menuSelect);
+        nDate = findViewById(R.id.dateTime);
 
         //declare firebase auth and store
         fAuth = FirebaseAuth.getInstance();
@@ -70,10 +75,17 @@ public class NotificationsActivity extends AppCompatActivity {
         meetingsRecyclerView.setAdapter(meetingsAdapter);
         showMeetings();
 
+        // Sets Date text to current Date
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat formatDate = new SimpleDateFormat("EEE, MMM d");
+        String formattedDate = formatDate.format(calendar.getTime());
+        nDate.setText(formattedDate);
+
         // Nav to Notifications
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                meetingRegistration.remove();
                 Intent i = new Intent(NotificationsActivity.this, HomeActivity.class);
                 startActivity(i);
             }
@@ -87,6 +99,7 @@ public class NotificationsActivity extends AppCompatActivity {
                 userDetails.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        meetingRegistration.remove();
                         String isManager = documentSnapshot.getString("manager");
                         Intent i;
                         if (isManager.equals("true")) { // if user is a manager
@@ -102,10 +115,18 @@ public class NotificationsActivity extends AppCompatActivity {
         });
     }
 
+    // Override going back to Sign In screen upon back click
+    @Override
+    public void onBackPressed(){
+        meetingRegistration.remove();
+        Intent i = new Intent(NotificationsActivity.this, HomeActivity.class);
+        startActivity(i);
+    }
+
     private void showMeetings(){
         userID = fAuth.getCurrentUser().getUid();
         acceptedCheck = userID + "0";
-        fStore.collection("meetings").whereArrayContains("invited", acceptedCheck).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        meetingRegistration = fStore.collection("meetings").whereArrayContains("invited", acceptedCheck).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 for (DocumentChange documentChange : value.getDocumentChanges()){
